@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif !important;
+    &.light{
+        @import './theme-light';
+    }
+    &.dark{
+        @import './theme-dark';
+    }
+}
+
+//common utility
+.cursor-pointer{
+    cursor: pointer;
+}
+.cursor-move{
+    cursor:move;
+}
+.font-semibold{
+    font-weight: 600;
+}
+.font-bold{
+    font-weight: 800;
+}
+.hover-shadow{
+    &:hover{
+        box-shadow: 0 0 10px gray;
+    }
+}

@@ -1,0 +1,30 @@
+<div [ngClass]="['login-container row align-items-center',isDarkTheme ? 'bg-dark text-white': 'bg-light']">
+    <div class="col-12 col-md-4 offset-md-4">
+        <div [ngClass]="['form-container border shadow card p-3',isDarkTheme ? 'bg-dark text-white': 'bg-light']">
+            <h3 class="msg">Login</h3>
+            <form (keydown)="userName.value && password.value && onEnter($event,userName.value,password.value)">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">User name</label>
+                    <input #userName type="text" class="form-control" aria-describedby="emailHelp"
+                        placeholder="Enter user name">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your user name with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input #password type="password" class="form-control" placeholder="Password">
+                </div>
+                <div *ngIf="invalidcredentials" class="error-msg p-2 text-danger">Invaid user name or password</div>
+                <button (click)="$event.preventDefault(); authenticate(userName.value,password.value)" 
+                   [disabled]="!userName.value || !password.value || !processing? true : null"
+                   class="btn btn-success mt-3 w-100">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> {{errorMessage}}
+            <button type="button" class="close" (click)="closeErrorMessage()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="movie-list-container px-0 px-md-5">
+    <div *ngIf="!isError" class="row mt-2">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h5 class="page-title font-semibold"><span class="pl-2 d-block">Movies</span></h5>
+            <div class="serch-box">
+                <form class="form-inline my-2 my-lg-0">
+                    <input #searchInput (keyup)="filterList(searchInput.value)"
+                     class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isSearchActive" class="row my-2">
+        <div class="col-12 text-muted">Found {{movies.length}} results</div>
+    </div>
+    <div *ngIf="movies && !isError" class="row">
+        <div *ngFor="let movie of movies" class="col-12 mb-2">
+            <div class="movie-card hover-shadow shadow-sm mt-2 border cursor-pointer rounded overflow-hidden"
+                (click)="showInModal(movie)">
+                <div class="banner position-relative">
+                    <div *ngIf="movie.title" class="avatar rounded-circle border overflow-hidden position-relative">
+                        <img [src]="'https://ui-avatars.com/api/?size=128&&background=random&&name='+movie.title" alt=""
+                            class="img-fluid">
+                    </div>
+                </div>
+                <div class="movie-details px-3 pb-2">
+                    <h3 *ngIf="movie.title" class="title">{{movie.title}}</h3>
+                    <div *ngIf="movie.genres" class="genres text-muted font-semibold">{{movie.genres}}</div>
+                    <div *ngIf="movie.description" class="description text-muted">{{movie.description}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--dynamic modal box -->
+    <div *ngIf="isModal" [ngClass]="{'modal fade':true,'show':isModal}" tabindex="-1" role="dialog"
+        [ngStyle]="{'display' : isModal? 'block': 'none'}" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-black-50 py-2 bg-light d-flex">
+                    <h5 class="modal-title">Details</h5>
+                    <div class="close-btn cursor-pointer" (click)="closeModal()">&times;</div>
+                </div>
+                <div class="modal-body p-0">
+                    <!-- modal text -->
+                    <div class="overflow-hidden">
+                        <div class="p-2">
+                            <div *ngIf="movieInModal.title" class="avatar w-100 rounded text-center overflow-hidden">
+                                <img [src]="'https://ui-avatars.com/api/?size=200&&background=random&&name='+movieInModal.title"
+                                    alt="" class="img-fluid">
+                            </div>
+                            <div class="title pt-3">
+                                <h3 *ngIf="movieInModal.title" class="title ml-2 text-black-50 font-bold">
+                                    {{movieInModal.title}}</h3>
+                            </div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <span class="font-semibold text-muted">Description</span>
+                            <div *ngIf="movieInModal.description" class="description text-muted">
+                                {{movieInModal.description}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error state -->
+    <div *ngIf="isError" class="row py-5 error-page">
+        <div class="col-12 text-center">
+            <h3>Something went wrong!</h3>
+            <div class="error-image">
+                <img [src]="'https://ui-avatars.com/api/?size=258&&background=random&&name=Error'" alt=""
+                    class="img-fluid">
+            </div>
+            <div class="text-muted mt-2">This might be a problem at server side, refreshing the page may fix this.</div>
+            <button (click)="refreshPage()" class="btn btn-success mt-4">Refresh</button>
+        </div>
+    </div>
+    <!-- pagination -->
+    <div *ngIf="!isError && !isSearchActive" class="row">
+        <div class="col-12">
+            <mat-paginator [length]="totalMovies" [pageSize]="10" [hidePageSize]="true" (page)="changePage($event)">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

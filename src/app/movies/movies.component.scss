@@ -1,0 +1,62 @@
+.movie-list-container{
+    .page-title{
+        border-left: 6px solid green;
+    }
+    .avatar{
+        height: 4em;
+        width: 4em;
+        left: 1em;
+        bottom: -2em;
+    }
+        
+    .banner{
+        height: 4em;
+        background: #00C9FF;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #92FE9D, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .movie-details{
+        height: 8.5em;
+        padding-top: 2.5em;
+        .limit{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }
+        .title{
+            @extend .limit;            
+            -webkit-line-clamp: 1;
+        }
+        .description{
+            @extend .limit;            
+            -webkit-line-clamp: 1;
+        }        
+    }
+
+    .modal{
+        background-color: rgba(20,20,20,0.5);
+    }
+    .modal{
+        .close-btn{
+            font-weight: 800;
+            font-size: 1.5em;
+            &:hover{
+                color: red;
+            }
+        }
+        .avatar{
+            height: 100%;
+            width: 100%;
+            left: unset;
+            bottom: unset;
+        }
+    }
+
+    .error-page{
+        height: calc(100vh - 50px);
+        error-image{
+            width: 100%;
+        }
+    }
+}

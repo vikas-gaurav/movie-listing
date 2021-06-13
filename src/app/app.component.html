@@ -1,0 +1,25 @@
+<div class="app-container container-fluid">
+  <!--The app header-->
+  <div class="app-header bg-primary row position-sticky sticky-top shadow d-flex align-items-center text-white">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <div class="logo font-bold">Movies</div>
+      <div class="right-section d-flex justify-content-end align-items-center">
+        <div (click)="toggleTheme()" [title]=" isDarkTheme ? 'Light theme': 'Dark theme'" class="theme-btn text-white cursor-pointer">
+          <span [ngClass]="['fa px-2', isDarkTheme ? 'fa-sun-o': 'fa-moon-o']"></span>
+        </div>
+        <div *ngIf="isUserLoggedIn" (click)="doLogout()" class="logout-btn cursor-pointer">Logout</div>
+      </div>
+    </div>
+  </div>
+  <!-- app body -->
+  <div [ngClass]="['row', isDarkTheme ? 'bg-dark text-white': 'bg-light']">
+    <div class="col-12">
+      <div *ngIf="isUserLoggedIn; else login">
+        <app-movies></app-movies>
+      </div>
+      <ng-template #login>
+        <app-login></app-login>
+      </ng-template>
+    </div>
+  </div>
+</div>

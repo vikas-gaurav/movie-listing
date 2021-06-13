@@ -1,0 +1,10 @@
+@import '../mat-color-variables';
+.app-container{
+    background-color: $mat-background-default;
+    .app-header{
+        height: 50px;
+        .logo{
+            font-size: 1.5em;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+// Import library functions for theme creation.
+@import '~@angular/material/theming';
+
+$mat-background-default: white !default;
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin create-theme-colors($theme) {
+  // Extract the palettes you need from the theme definition.
+  $mat-primary-palette: map-get($theme, primary);
+  $mat-accent-palette: map-get($theme, accent);
+  $mat-warn-palette : map-get($theme, warn);
+
+  $mat-foreground-palette : map-get($map: $theme, $key: foreground);
+  $mat-background-palette : map-get($map: $theme, $key: background);
+
+  $mat-background-card : mat-color($mat-background-palette, card);
+  $mat-background-default : mat-color($mat-background-palette, background) !global;
+
+  $mat-foreground-text : mat-color($mat-foreground-palette, text);
+
+  $mat-primary: mat-color($mat-primary-palette);
+  $mat-accent: mat-color($mat-accent-palette);
+  $mat-warn: mat-color($mat-warn-palette);
+  
+}
